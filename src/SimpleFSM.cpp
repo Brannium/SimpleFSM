@@ -344,6 +344,10 @@ bool SimpleFSM::_changeToState(State* s, unsigned long now) {
   // save the time
   last_run = now;
   last_transition = now;
+  // reset timed transitions
+  for (int i = 0; i < num_timed; i++) {
+    timed[i].reset();
+  }
   // is this the end?
   if (s->is_final && finished_cb != NULL) finished_cb();
   if (s->is_final) is_finished = true;
